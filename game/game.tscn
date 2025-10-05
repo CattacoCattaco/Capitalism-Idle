@@ -91,3 +91,7 @@ autostart = true
 [node name="WageTimer" type="Timer" parent="StatsManager"]
 wait_time = 60.0
 autostart = true
+
+[node name="EventTimer" type="Timer" parent="StatsManager"]
+wait_time = 360.0
+autostart = true
