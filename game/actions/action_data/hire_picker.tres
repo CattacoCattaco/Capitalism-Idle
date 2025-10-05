@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://bkhkh5g7gsl5d"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_edsrn"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="2_fbd8v"]
+
+[sub_resource type="Resource" id="Resource_m3eto"]
+script = ExtResource("2_fbd8v")
+req = 10
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_edsrn")
+name = "Hire Picker"
+description = "Hire a flower picker who picks 1 flower per second and costs 12 coins per minute."
+button_text = "Hire"
+stat_changes = Dictionary[int, int]({
+2: 1
+})
+unlock_condition = SubResource("Resource_m3eto")
+metadata/_custom_type_script = "uid://00q3eopp00vt"

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://dgsej2j4b0npx"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_t40m7"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="2_enpi5"]
+
+[sub_resource type="Resource" id="Resource_m3eto"]
+script = ExtResource("2_enpi5")
+stat = 4
+req = 50
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_t40m7")
+name = "Hire Manager"
+description = "Hire a manager who reduces disorganization but costs 30 coins per minute."
+button_text = "Hire"
+stat_changes = Dictionary[int, int]({
+5: 1
+})
+unlock_condition = SubResource("Resource_m3eto")
+metadata/_custom_type_script = "uid://00q3eopp00vt"

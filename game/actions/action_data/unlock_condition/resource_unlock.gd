@@ -18,11 +18,11 @@ func _on_stat_update(changed_stat: StatsManager.Stat, value: int) -> void:
 	
 	match type:
 		ReqType.MIN:
-			if value <= req:
+			if value >= req:
 				stats_manager._stat_changed.disconnect(_on_stat_update)
 				_unlock()
 		ReqType.MAX:
-			if value >= req:
+			if value <= req:
 				stats_manager._stat_changed.disconnect(_on_stat_update)
 				_unlock()
 		ReqType.EXACT:

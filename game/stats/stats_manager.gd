@@ -8,20 +8,39 @@ signal _stat_visibility_changed(stat: Stat, visibility: bool)
 enum Stat {
 	COINS,
 	FLOWERS,
+	PICKERS,
+	FLOWER_SELLERS,
+	DISORGANIZATION,
+	MANAGERS,
 	STAT_COUNT ## Not a real stat but tells how many stats there are
 }
 
 const STAT_NAMES: Array[String] = [
 	"Coins",
 	"Flowers",
+	"Pickers",
+	"Flower Sellers",
+	"Disorganization",
+	"Managers",
 ]
 
 const STAT_COLORS: Array[Color] = [
 	Color(1, 1, 0),
 	Color(1, 0.6, 0.8),
+	Color(0, 1, 0.5),
+	Color(0.8, 1, 0),
+	Color(1, 0.3, 0.1),
+	Color(0, 0.8, 1),
 ]
 
+@export var work_timer: Timer
+@export var wage_timer: Timer
+
 var stats: Array[int] = [
+	0,
+	0,
+	0,
+	0,
 	0,
 	0,
 ]
@@ -29,7 +48,61 @@ var stats: Array[int] = [
 var stat_visibility: Array[bool] = [
 	true,
 	false,
+	false,
+	false,
+	false,
+	false,
 ]
+
+
+func _ready() -> void:
+	work_timer.timeout.connect(_calc_work)
+	wage_timer.timeout.connect(_calc_wages)
+
+
+func _calc_work() -> void:
+	for i in range(stats[Stat.PICKERS]):
+		if randf() < stats[Stat.DISORGANIZATION] / 1000.0:
+			continue
+		
+		change_stat(Stat.FLOWERS, 1)
+	
+	for i in range(stats[Stat.FLOWER_SELLERS]):
+		if randf() < stats[Stat.DISORGANIZATION] / 1000.0:
+			continue
+		
+		_try_action_stat_changes(preload("res://game/actions/action_data/sell_flowers.tres"))
+	
+	if _get_employee_count(0) > 10 * (_get_employee_count(1) + 1):
+		var imbalance: int = floori(_get_employee_count(0) / 10.0) - _get_employee_count(1)
+		change_stat(Stat.DISORGANIZATION, imbalance)
+	elif stats[Stat.DISORGANIZATION] > 0:
+		change_stat(Stat.DISORGANIZATION, -1)
+
+
+func _calc_wages() -> void:
+	while stats[Stat.COINS] < 30 * stats[Stat.MANAGERS]:
+		change_stat(Stat.MANAGERS, -1)
+	change_stat(Stat.COINS, -30 * stats[Stat.MANAGERS])
+	
+	while stats[Stat.COINS] < 12 * stats[Stat.PICKERS]:
+		change_stat(Stat.PICKERS, -1)
+	change_stat(Stat.COINS, -12 * stats[Stat.PICKERS])
+	
+	while stats[Stat.COINS] < 15 * stats[Stat.FLOWER_SELLERS]:
+		change_stat(Stat.FLOWER_SELLERS, -1)
+	change_stat(Stat.COINS, -15 * stats[Stat.FLOWER_SELLERS])
+
+
+func _get_employee_count(tier: int) -> int:
+	match tier:
+		0:
+			return (stats[Stat.PICKERS]
+					+ stats[Stat.FLOWER_SELLERS])
+		1:
+			return (stats[Stat.MANAGERS])
+	
+	return 0
 
 
 func _try_action_stat_changes(action: ActionData) -> void:

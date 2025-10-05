@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://ba5lxq6fyxsk2"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_sd1h6"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="2_rs31a"]
+
+[sub_resource type="Resource" id="Resource_m3eto"]
+script = ExtResource("2_rs31a")
+stat = 2
+req = 15
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_sd1h6")
+name = "Hire Flower Seller"
+description = "Hire a flower seller who sells 10 flowers per second and costs 15 coins per minute."
+button_text = "Hire"
+stat_changes = Dictionary[int, int]({
+3: 1
+})
+unlock_condition = SubResource("Resource_m3eto")
+metadata/_custom_type_script = "uid://00q3eopp00vt"
