@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2ey14gnswvj6"]
+
+[ext_resource type="Script" uid="uid://bwu14tnpaa6ct" path="res://game/actions/action.gd" id="1_fduo5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilclt"]
+bg_color = Color(0.14983341, 0, 0.31, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.03383335, 0, 0.07, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ga4c"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_fduo5"]
+
+[node name="Action" type="Panel" node_paths=PackedStringArray("name_label", "description_label", "button")]
+custom_minimum_size = Vector2(0, 70)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -652.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ilclt")
+script = ExtResource("1_fduo5")
+name_label = NodePath("NameLabel")
+description_label = NodePath("DescriptionLabel")
+button = NodePath("ActionButton")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 154.0
+offset_bottom = 34.0
+text = "Pick a flower"
+label_settings = SubResource("LabelSettings_7ga4c")
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -31.0
+offset_right = 50.0
+offset_bottom = -8.0
+grow_vertical = 0
+text = "Gain +1 flower"
+label_settings = SubResource("LabelSettings_fduo5")
+
+[node name="ActionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -15.5
+offset_right = -25.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "Do it!"

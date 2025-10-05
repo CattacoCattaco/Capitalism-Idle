@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg5n8hldsg7gp"]
-
-[ext_resource type="Script" uid="uid://c1rn3vlnttqat" path="res://game/actions/action_label/action_label.gd" id="1_4xp05"]
-
-[node name="ActionLabel" type="Label"]
-offset_right = 40.0
-offset_bottom = 23.0
-size_flags_horizontal = 3
-script = ExtResource("1_4xp05")

@@ -32,7 +32,7 @@ var stat_visibility: Array[bool] = [
 ]
 
 
-func _try_action_stat_changes(action: Action) -> void:
+func _try_action_stat_changes(action: ActionData) -> void:
 	# Can all negative changes (costs) be fulfilled?
 	var all_negatives_pass: bool = true
 	

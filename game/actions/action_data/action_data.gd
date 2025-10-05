@@ -1,4 +1,4 @@
-class_name Action
+class_name ActionData
 extends Resource
 
 @export var name: String = ""
