@@ -51,3 +51,8 @@ func create_action(data: ActionData) -> void:
 	action.button.pressed.connect(stats_manager._try_action_stat_changes.bind(data))
 	
 	actions_grid.add_child(action)
+	
+	action.hide()
+	data.unlock_condition._unlocked.connect(action.show)
+	data.unlock_condition.stats_manager = stats_manager
+	data.unlock_condition._setup()

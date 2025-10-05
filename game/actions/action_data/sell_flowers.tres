@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://cj0063f10uuap"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_xpraw"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="2_rngsp"]
+
+[sub_resource type="Resource" id="Resource_jcnhi"]
+script = ExtResource("2_rngsp")
+stat = 1
+req = 3
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_xpraw")
+name = "Sell Flowers"
+description = "Spend 10 flowers to gain 3 coins."
+button_text = "Sell"
+stat_changes = Dictionary[int, int]({
+0: 3,
+1: -10
+})
+unlock_condition = SubResource("Resource_jcnhi")
+metadata/_custom_type_script = "uid://00q3eopp00vt"
