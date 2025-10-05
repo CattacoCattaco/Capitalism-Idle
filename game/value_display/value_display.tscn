@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://beau0lsjrdcvp"]
+
+[ext_resource type="Script" uid="uid://dyv5dmrwajely" path="res://game/value_display/value_display.gd" id="1_vwepy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vwepy"]
+resource_local_to_scene = true
+font_color = Color(1, 1, 0, 1)
+
+[node name="ValueDisplay" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hello"
+label_settings = SubResource("LabelSettings_vwepy")
+script = ExtResource("1_vwepy")

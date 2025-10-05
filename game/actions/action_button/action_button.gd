@@ -1,0 +1,2 @@
+class_name ActionButton
+extends Button

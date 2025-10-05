@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ydpgol2gytv3"]
+[gd_scene load_steps=5 format=3 uid="uid://ydpgol2gytv3"]
 
 [ext_resource type="Script" uid="uid://dh10rkjj2a5mn" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action.gd" id="2_4fuuu"]
+[ext_resource type="Script" uid="uid://cgls1mgsvfdl0" path="res://game/stats/stats_manager.gd" id="2_vasa2"]
+[ext_resource type="Resource" uid="uid://cxlvprt4ouucj" path="res://game/actions/action_data/pick_flower.tres" id="3_dxrkv"]
 
-[node name="Game" type="Control"]
+[node name="Game" type="Control" node_paths=PackedStringArray("value_display_row", "actions_grid", "stats_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +13,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l1rk1")
+value_display_row = NodePath("VBoxContainer/ColorRect/ValueDisplayRow")
+actions_grid = NodePath("VBoxContainer/ColorRect2/ActionsGrid")
+stats_manager = NodePath("StatsManager")
+actions = Array[ExtResource("2_4fuuu")]([ExtResource("3_dxrkv")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -18,13 +25,45 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+color = Color(0.16862746, 0, 0.3529412, 1)
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="ValueDisplayRow" type="HBoxContainer" parent="VBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
-columns = 3
+color = Color(0.10633339, 0, 0.22, 1)
+
+[node name="ActionsGrid" type="GridContainer" parent="VBoxContainer/ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = -10.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+columns = 2
+
+[node name="StatsManager" type="Node" parent="."]
+script = ExtResource("2_vasa2")
