@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=11 format=3 uid="uid://bjejdqmlv5qfg"]
+
+[ext_resource type="Resource" uid="uid://rhelpivucbfu" path="res://game/event/event_data/event_actions/raise_quotas.tres" id="1_diilf"]
+[ext_resource type="Script" uid="uid://c7mf7ubpm2d5e" path="res://game/event/event_data/event_data.gd" id="1_skolb"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="1_tfrbe"]
+[ext_resource type="Resource" uid="uid://b2ixlc1021vmc" path="res://game/event/event_data/event_actions/keep_level_quotas.tres" id="2_oy7ng"]
+[ext_resource type="Script" uid="uid://bagw7o2xatgun" path="res://game/actions/action_data/unlock_condition/multi_condition_unlock.gd" id="3_escwj"]
+[ext_resource type="Script" uid="uid://85epk87x6pmp" path="res://game/actions/action_data/unlock_condition/unlock_condition.gd" id="4_o41hn"]
+
+[sub_resource type="Resource" id="Resource_v5bp0"]
+script = ExtResource("1_tfrbe")
+stat = 9
+req = 120
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_yw6b7"]
+script = ExtResource("1_tfrbe")
+stat = 7
+req = 120
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_ogkr7"]
+script = ExtResource("3_escwj")
+unlock_conditions = Array[ExtResource("4_o41hn")]([SubResource("Resource_v5bp0"), SubResource("Resource_yw6b7")])
+mode = 1
+metadata/_custom_type_script = "uid://bagw7o2xatgun"
+
+[sub_resource type="Resource" id="Resource_0vkxl"]
+script = ExtResource("1_tfrbe")
+stat = 2
+req = 1
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_skolb")
+name = "Higher Quotas"
+description = "You have realized that you could increase your profits by raising the quotas while keeping everyone's wages the same (except for yours of course). It may cause your employees to like you less but who cares, right?"
+action_1 = ExtResource("1_diilf")
+action_2 = ExtResource("2_oy7ng")
+unlock_condition = SubResource("Resource_0vkxl")
+lock_condition = SubResource("Resource_ogkr7")
+metadata/_custom_type_script = "uid://c7mf7ubpm2d5e"

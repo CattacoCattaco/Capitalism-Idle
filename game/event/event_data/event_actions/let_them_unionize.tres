@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://dhx07m8178uuy"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_w347p"]
+[ext_resource type="Script" uid="uid://bug83in8ko6bx" path="res://game/actions/action_data/unlock_condition/base_unlock.gd" id="2_tbw3s"]
+
+[sub_resource type="Resource" id="Resource_1gxsy"]
+script = ExtResource("2_tbw3s")
+metadata/_custom_type_script = "uid://bug83in8ko6bx"
+
+[resource]
+script = ExtResource("1_w347p")
+name = "Let Them Unionize"
+description = "Don't pay the firm, risking unionization."
+button_text = "Don't pay"
+stat_changes = Dictionary[int, int]({
+6: 1
+})
+unlock_condition = SubResource("Resource_1gxsy")
+metadata/_custom_type_script = "uid://00q3eopp00vt"

@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://bxyx1pkugg68a"
 [resource]
 script = ExtResource("1_t40m7")
 name = "Hire Manager"
-description = "Hire a manager who reduces disorganization but costs 30 coins per minute."
+description = "Hire a manager who reduces disorganization and costs 30 coins per minute."
 button_text = "Hire"
 stat_changes = Dictionary[int, int]({
 5: 1

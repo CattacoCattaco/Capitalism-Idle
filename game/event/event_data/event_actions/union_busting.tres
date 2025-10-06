@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://15gvkbmegwpk"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_g11ux"]
+[ext_resource type="Script" uid="uid://bug83in8ko6bx" path="res://game/actions/action_data/unlock_condition/base_unlock.gd" id="2_grmah"]
+
+[sub_resource type="Resource" id="Resource_pa6sv"]
+script = ExtResource("2_grmah")
+metadata/_custom_type_script = "uid://bug83in8ko6bx"
+
+[resource]
+script = ExtResource("1_g11ux")
+name = "Union Busting"
+description = "Pay the firm 50 coins to keep them from unionizing."
+button_text = "Bust"
+stat_changes = Dictionary[int, int]({
+0: -50
+})
+unlock_condition = SubResource("Resource_pa6sv")
+metadata/_custom_type_script = "uid://00q3eopp00vt"

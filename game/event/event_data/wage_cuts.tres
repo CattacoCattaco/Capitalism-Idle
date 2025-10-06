@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=9 format=3 uid="uid://c3kyfopwavuq5"]
+
+[ext_resource type="Script" uid="uid://bagw7o2xatgun" path="res://game/actions/action_data/unlock_condition/multi_condition_unlock.gd" id="1_a02nv"]
+[ext_resource type="Script" uid="uid://c7mf7ubpm2d5e" path="res://game/event/event_data/event_data.gd" id="1_dyysx"]
+[ext_resource type="Script" uid="uid://85epk87x6pmp" path="res://game/actions/action_data/unlock_condition/unlock_condition.gd" id="2_jxj6x"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="3_woi1m"]
+
+[sub_resource type="Resource" id="Resource_6tdnk"]
+script = ExtResource("3_woi1m")
+stat = 8
+req = 90
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_a4wp4"]
+script = ExtResource("3_woi1m")
+stat = 7
+req = 150
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_qudfy"]
+script = ExtResource("1_a02nv")
+unlock_conditions = Array[ExtResource("2_jxj6x")]([SubResource("Resource_6tdnk"), SubResource("Resource_a4wp4")])
+mode = 1
+metadata/_custom_type_script = "uid://bagw7o2xatgun"
+
+[sub_resource type="Resource" id="Resource_0nbsv"]
+script = ExtResource("3_woi1m")
+stat = 2
+req = 1
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[resource]
+script = ExtResource("1_dyysx")
+name = "Wage Cuts"
+description = "You have realized that you could increase your profits by lowering the raises while keeping everyone's work load the same. It may cause your employees to like you less but who cares, right?"
+unlock_condition = SubResource("Resource_0nbsv")
+lock_condition = SubResource("Resource_qudfy")
+metadata/_custom_type_script = "uid://c7mf7ubpm2d5e"

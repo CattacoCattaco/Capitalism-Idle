@@ -12,6 +12,10 @@ enum Stat {
 	FLOWER_SELLERS,
 	DISORGANIZATION,
 	MANAGERS,
+	UNIONS,
+	TRUST,
+	WAGE_CUTS,
+	SPEED_UP,
 	STAT_COUNT ## Not a real stat but tells how many stats there are
 }
 
@@ -22,19 +26,28 @@ const STAT_NAMES: Array[String] = [
 	"Flower Sellers",
 	"Disorganization",
 	"Managers",
+	"Unions",
+	"Internal Trust",
+	"Wage cuts",
+	"Bonus Efficiency",
 ]
 
 const STAT_COLORS: Array[Color] = [
 	Color(1, 1, 0),
 	Color(1, 0.6, 0.8),
-	Color(0, 1, 0.5),
-	Color(0.8, 1, 0),
-	Color(1, 0.3, 0.1),
+	Color(0.3, 1, 0),
+	Color(0.3, 1, 0),
+	Color(1, 0.1, 0.1),
 	Color(0, 0.8, 1),
+	Color(1, 0.1, 0.1),
+	Color(0.2, 1, 0.9),
+	Color(0.75, 1, 0),
+	Color(0.75, 1, 0),
 ]
 
 @export var work_timer: Timer
 @export var wage_timer: Timer
+@export var event_timer: Timer
 
 var stats: Array[int] = [
 	0,
@@ -43,10 +56,18 @@ var stats: Array[int] = [
 	0,
 	0,
 	0,
+	0,
+	100,
+	0,
+	0,
 ]
 
 var stat_visibility: Array[bool] = [
 	true,
+	false,
+	false,
+	false,
+	false,
 	false,
 	false,
 	false,
@@ -71,7 +92,7 @@ func _calc_work() -> void:
 		if randf() < stats[Stat.DISORGANIZATION] / 1000.0:
 			continue
 		
-		_try_action_stat_changes(preload("res://game/actions/action_data/sell_flowers.tres"))
+		_try_action_stat_changes(load("res://game/actions/action_data/sell_flowers.tres"))
 	
 	if _get_employee_count(0) > 10 * (_get_employee_count(1) + 1):
 		var imbalance: int = floori(_get_employee_count(0) / 10.0) - _get_employee_count(1)
@@ -81,17 +102,20 @@ func _calc_work() -> void:
 
 
 func _calc_wages() -> void:
-	while stats[Stat.COINS] < 30 * stats[Stat.MANAGERS]:
+	var manager_wage: int = floor(30 * (1 - stats[Stat.WAGE_CUTS] / 100.0))
+	while stats[Stat.COINS] < manager_wage * stats[Stat.MANAGERS]:
 		change_stat(Stat.MANAGERS, -1)
-	change_stat(Stat.COINS, -30 * stats[Stat.MANAGERS])
+	change_stat(Stat.COINS, -manager_wage * stats[Stat.MANAGERS])
 	
-	while stats[Stat.COINS] < 12 * stats[Stat.PICKERS]:
+	var picker_wage: int = floor(12 * (1 - stats[Stat.WAGE_CUTS] / 100.0))
+	while stats[Stat.COINS] < picker_wage * stats[Stat.PICKERS]:
 		change_stat(Stat.PICKERS, -1)
-	change_stat(Stat.COINS, -12 * stats[Stat.PICKERS])
+	change_stat(Stat.COINS, -picker_wage * stats[Stat.PICKERS])
 	
-	while stats[Stat.COINS] < 15 * stats[Stat.FLOWER_SELLERS]:
+	var flower_seller_wage: int = floor(15 * (1 - stats[Stat.WAGE_CUTS] / 100.0))
+	while stats[Stat.COINS] < flower_seller_wage * stats[Stat.FLOWER_SELLERS]:
 		change_stat(Stat.FLOWER_SELLERS, -1)
-	change_stat(Stat.COINS, -15 * stats[Stat.FLOWER_SELLERS])
+	change_stat(Stat.COINS, -flower_seller_wage * stats[Stat.FLOWER_SELLERS])
 
 
 func _get_employee_count(tier: int) -> int:
@@ -130,6 +154,9 @@ func set_stat(stat: Stat, value: int) -> void:
 	
 	if (not stat_visibility[stat]) and stats[stat] != 0:
 		change_stat_visibility(stat, true)
+	
+	if stat == Stat.SPEED_UP:
+		work_timer.wait_time = 60.0 / (60 + 5 * stats[Stat.SPEED_UP])
 
 
 func change_stat_visibility(stat: Stat, visibility: bool) -> void:

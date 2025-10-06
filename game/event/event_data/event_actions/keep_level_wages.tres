@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionData" load_steps=4 format=3 uid="uid://b3172g2i3rbbi"]
+
+[ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="1_d77f8"]
+[ext_resource type="Script" uid="uid://bug83in8ko6bx" path="res://game/actions/action_data/unlock_condition/base_unlock.gd" id="2_6jq3n"]
+
+[sub_resource type="Resource" id="Resource_fv4q6"]
+script = ExtResource("2_6jq3n")
+metadata/_custom_type_script = "uid://bug83in8ko6bx"
+
+[resource]
+script = ExtResource("1_d77f8")
+name = "Keep Level Wages"
+description = "Keep wages where they are. Maybe your employees will even gain some trust in the stability of their job."
+button_text = "Raise"
+stat_changes = Dictionary[int, int]({
+7: 1
+})
+unlock_condition = SubResource("Resource_fv4q6")
+metadata/_custom_type_script = "uid://00q3eopp00vt"

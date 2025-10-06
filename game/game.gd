@@ -7,10 +7,13 @@ const VALUE_DISPLAY_SCENE: PackedScene = preload("res://game/value_display/value
 @export var value_display_row: HBoxContainer
 @export var actions_grid: GridContainer
 @export var stats_manager: StatsManager
+@export var event: Event
 @export var action_data: Array[ActionData]
+@export var event_data: Array[EventData]
 
 var value_displays: Array[ValueDisplay] = []
 var actions: Array[Action] = []
+var potential_events: Array[EventData]
 
 
 func _ready() -> void:
@@ -18,8 +21,22 @@ func _ready() -> void:
 	for stat: StatsManager.Stat in range(StatsManager.Stat.STAT_COUNT):
 		create_value_label(stat)
 	
-	for action: ActionData in action_data:
-		create_action(action)
+	for data: ActionData in action_data:
+		create_action(data)
+	
+	for data: EventData in event_data:
+		data.unlock_condition.stats_manager = stats_manager
+		data.lock_condition.stats_manager = stats_manager
+		
+		data.unlock_condition._unlocked.connect(potential_events.append.bind(data))
+		data.lock_condition._unlocked.connect(potential_events.erase.bind(data))
+		
+		data.unlock_condition._setup()
+		data.lock_condition._setup()
+	
+	event.stats_manager = stats_manager
+	
+	stats_manager.event_timer.timeout.connect(_do_event)
 
 
 func create_value_label(stat: StatsManager.Stat) -> void:
@@ -44,15 +61,14 @@ func create_value_label(stat: StatsManager.Stat) -> void:
 func create_action(data: ActionData) -> void:
 	var action: Action = ACTION_SCENE.instantiate()
 	
-	action.name_label.text = data.name
-	action.description_label.text = data.description
-	
-	action.button.text = data.button_text
-	action.button.pressed.connect(stats_manager._try_action_stat_changes.bind(data))
-	
 	actions_grid.add_child(action)
 	
-	action.hide()
-	data.unlock_condition._unlocked.connect(action.show)
-	data.unlock_condition.stats_manager = stats_manager
-	data.unlock_condition._setup()
+	action.stats_manager = stats_manager
+	
+	action.load_action(data)
+
+
+func _do_event() -> void:
+	if len(potential_events) > 0:
+		event.show()
+		event._load_event(potential_events.pick_random())

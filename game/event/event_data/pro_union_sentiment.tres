@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=11 format=3 uid="uid://c5qtx4wobow1r"]
+
+[ext_resource type="Resource" uid="uid://15gvkbmegwpk" path="res://game/event/event_data/event_actions/union_busting.tres" id="1_1s7hf"]
+[ext_resource type="Script" uid="uid://c7mf7ubpm2d5e" path="res://game/event/event_data/event_data.gd" id="1_tn08w"]
+[ext_resource type="Resource" uid="uid://dhx07m8178uuy" path="res://game/event/event_data/event_actions/let_them_unionize.tres" id="2_i1ygo"]
+[ext_resource type="Script" uid="uid://bxyx1pkugg68a" path="res://game/actions/action_data/unlock_condition/resource_unlock.gd" id="3_be1yy"]
+[ext_resource type="Script" uid="uid://bagw7o2xatgun" path="res://game/actions/action_data/unlock_condition/multi_condition_unlock.gd" id="5_p4vxc"]
+[ext_resource type="Script" uid="uid://85epk87x6pmp" path="res://game/actions/action_data/unlock_condition/unlock_condition.gd" id="6_n6t3w"]
+
+[sub_resource type="Resource" id="Resource_11i0t"]
+script = ExtResource("3_be1yy")
+stat = 6
+req = 1
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_be1yy"]
+script = ExtResource("3_be1yy")
+req = 100
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_p4vxc"]
+script = ExtResource("3_be1yy")
+stat = 4
+req = 30
+metadata/_custom_type_script = "uid://bxyx1pkugg68a"
+
+[sub_resource type="Resource" id="Resource_n6t3w"]
+script = ExtResource("5_p4vxc")
+unlock_conditions = Array[ExtResource("6_n6t3w")]([SubResource("Resource_be1yy"), SubResource("Resource_p4vxc")])
+metadata/_custom_type_script = "uid://bagw7o2xatgun"
+
+[resource]
+script = ExtResource("1_tn08w")
+name = "Pro-Union Sentiment"
+description = "Your employees are starting to think about trying to unionize. That's bad for you because if they do, you won't be able to exploit them as much. Luckily there is a firm which will help you sow distrust in unions for a price."
+action_1 = ExtResource("1_1s7hf")
+action_2 = ExtResource("2_i1ygo")
+unlock_condition = SubResource("Resource_n6t3w")
+lock_condition = SubResource("Resource_11i0t")
+metadata/_custom_type_script = "uid://c7mf7ubpm2d5e"

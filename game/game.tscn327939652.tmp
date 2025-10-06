@@ -1,19 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://ydpgol2gytv3"]
+[gd_scene load_steps=8 format=3 uid="uid://ydpgol2gytv3"]
 
 [ext_resource type="Script" uid="uid://dh10rkjj2a5mn" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="Script" uid="uid://00q3eopp00vt" path="res://game/actions/action_data/action_data.gd" id="2_4fuuu"]
 [ext_resource type="Script" uid="uid://cgls1mgsvfdl0" path="res://game/stats/stats_manager.gd" id="2_vasa2"]
 [ext_resource type="Resource" uid="uid://cxlvprt4ouucj" path="res://game/actions/action_data/pick_flower.tres" id="3_dxrkv"]
-[ext_resource type="Resource" uid="uid://6nsdq6h4dekf" path="res://game/actions/action_data/sell_flowers.tres" id="4_dxrkv"]
 [ext_resource type="Resource" uid="uid://bkhkh5g7gsl5d" path="res://game/actions/action_data/hire_picker.tres" id="5_dakft"]
 [ext_resource type="Resource" uid="uid://ba5lxq6fyxsk2" path="res://game/actions/action_data/hire_flower_seller.tres" id="6_u5opy"]
 [ext_resource type="Resource" uid="uid://dgsej2j4b0npx" path="res://game/actions/action_data/hire_manager.tres" id="7_y36n6"]
-[ext_resource type="Script" uid="uid://c7mf7ubpm2d5e" path="res://game/event/event_data/event_data.gd" id="8_j8tme"]
-[ext_resource type="Resource" uid="uid://c5qtx4wobow1r" path="res://game/event/event_data/pro_union_sentiment.tres" id="9_3vho3"]
-[ext_resource type="PackedScene" uid="uid://c567pwx6jf806" path="res://game/event/event.tscn" id="9_l8g03"]
-[ext_resource type="Resource" uid="uid://bjejdqmlv5qfg" path="res://game/event/event_data/higher_standards.tres" id="10_qf6n1"]
 
-[node name="Game" type="Control" node_paths=PackedStringArray("value_display_row", "actions_grid", "stats_manager", "event")]
+[node name="Game" type="Control" node_paths=PackedStringArray("value_display_row", "actions_grid", "stats_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,9 +19,7 @@ script = ExtResource("1_l1rk1")
 value_display_row = NodePath("VBoxContainer/ColorRect/ScrollContainer/ValueDisplayRow")
 actions_grid = NodePath("VBoxContainer/ColorRect2/ScrollContainer/ActionsGrid")
 stats_manager = NodePath("StatsManager")
-event = NodePath("Event")
-action_data = Array[ExtResource("2_4fuuu")]([ExtResource("3_dxrkv"), ExtResource("4_dxrkv"), ExtResource("5_dakft"), ExtResource("6_u5opy"), ExtResource("7_y36n6")])
-event_data = Array[ExtResource("8_j8tme")]([ExtResource("9_3vho3"), ExtResource("10_qf6n1")])
+action_data = Array[ExtResource("2_4fuuu")]([ExtResource("3_dxrkv"), ExtResource("5_dakft"), ExtResource("6_u5opy"), ExtResource("7_y36n6")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -100,9 +93,5 @@ wait_time = 60.0
 autostart = true
 
 [node name="EventTimer" type="Timer" parent="StatsManager"]
-wait_time = 30.0
-autostart = true
-
-[node name="Event" parent="." instance=ExtResource("9_l8g03")]
-visible = false
-layout_mode = 1
+wait_time = 360.0
+one_shot = true

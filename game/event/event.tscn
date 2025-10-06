@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://c567pwx6jf806"]
+
+[ext_resource type="PackedScene" uid="uid://d2ey14gnswvj6" path="res://game/actions/action.tscn" id="1_a8r2i"]
+[ext_resource type="Script" uid="uid://bqdh882r3yv3t" path="res://game/event/event.gd" id="1_vijpx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vijpx"]
+bg_color = Color(0.096666716, 0, 0.2, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.03383335, 0, 0.07, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mml46"]
+bg_color = Color(0.14983341, 0, 0.31, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.03383335, 0, 0.07, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_jcqwy"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_31uw6"]
+font_size = 18
+
+[node name="Event" type="Panel" node_paths=PackedStringArray("name_label", "description_label", "action_holder", "action_1", "action_2")]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.15
+anchor_right = 0.9
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vijpx")
+script = ExtResource("1_vijpx")
+name_label = NodePath("Panel/NameLabel")
+description_label = NodePath("DescriptionLabel")
+action_holder = NodePath("VBoxContainer")
+action_1 = NodePath("VBoxContainer/Action")
+action_2 = NodePath("VBoxContainer/Action2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.12
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mml46")
+
+[node name="NameLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 2.0
+offset_right = -16.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A Thing Happened"
+label_settings = SubResource("LabelSettings_jcqwy")
+
+[node name="DescriptionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.18
+anchor_right = 0.97
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_right = -16.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "All of your workers want to join a union. "
+label_settings = SubResource("LabelSettings_31uw6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.55
+anchor_right = 0.97
+anchor_bottom = 0.95
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Action" parent="VBoxContainer" instance=ExtResource("1_a8r2i")]
+layout_mode = 2
+
+[node name="Action2" parent="VBoxContainer" instance=ExtResource("1_a8r2i")]
+layout_mode = 2
